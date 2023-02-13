@@ -2,6 +2,7 @@
 #Code by @chamchamfy
 mount -o rw,remount / 2> /dev/null; 
 ur=/sdcard/.ur
+libcc=$ur/libcc
 bins=$ur/bins 
 binu=$ur/bin
 bint=/data/data/com.termux/files/usr/bin 
@@ -11,8 +12,8 @@ mkdir -p $ur/bin 2> /dev/null;
 [ -e /system/bin -a -w /system/bin ] && bin=/system/bin || bin=/bin; 
 echo -n " + Tải dữ liệu mới (c/k): "; read k; 
 if [ "$k" = "c" ]; then echo " + Đang cập nhật..."; 
-[ ! -f $ur/bin.so ] && curl -L# https://sourceforge.net/projects/chamchamfy/files/Tools/bin.so -o $ur/bin.so 2> /dev/null 
-[ -f $ur/bin.so ] && tar -xJf $ur/bin.so -C $ur 2> /dev/null 
+[ ! -f $libcc/bin.so ] && curl -L# https://sourceforge.net/projects/chamchamfy/files/Tools/bin.so -o $ur/bin.so 2> /dev/null 
+[ -f $libcc/bin.so ] && tar -xJf $libcc/bin.so -C $ur 2> /dev/null 
 else echo " + Bỏ qua!"; 
 fi 
 cp -af $binu/* $bint 2> /dev/null 
