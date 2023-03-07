@@ -9,15 +9,13 @@ bint=/data/data/com.termux/files/usr/bin
 binc=/data/data/com.termux/files/toolcc/bin
 apktoolcc=$ur/cc/apktoolcc
 toolcc=/data/data/com.termux/files/toolcc
+opcc=$ur/cc/opcc
+libtoolcc=$ur/cc/libtoolcc
 binr=/system/bin
-mkdir -p $ur/bins 2> /dev/null; 
-mkdir -p $ur/binu 2> /dev/null; 
-mkdir -p $binc 2> /dev/null; 
-mkdir -p $toolcc 2> /dev/null; 
-mkdir -p $apktoolcc 2> /dev/null; 
+for t in $ur $bins $binu $libcc $apktoolcc $binc $opcc $libtoolcc; do mkdir -p -m 755 $t 2> /dev/null; done 
 echo -n " + Tải dữ liệu mới (c/k): "; read k; 
 if [ "$k" = "c" ]; then echo " + Đang cập nhật..."; 
-[ ! -f $licc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfyy/toolcc/main/bin.so -o $libcc/bin.so 2> /dev/null 
+[ ! -f $libcc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfyy/toolcc/main/bin.so -o $libcc/bin.so 2> /dev/null 
 [ ! -f $libcc/bin.so ] && curl -L# https://sourceforge.net/projects/chamchamfy/files/Tools/bin.so -o $libcc/bin.so 2> /dev/null 
 [ -f $libcc/bin.so ] && tar -xJf $libcc/bin.so -C $ur 2> /dev/null 
 [ ! -f $libcc/apktoolcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfyy/toolcc/main/apktoolcc.so -o $libcc/apktoolcc.so 2> /dev/null 
@@ -25,11 +23,19 @@ if [ "$k" = "c" ]; then echo " + Đang cập nhật...";
 else echo " + Bỏ qua!"; 
 cp -af $apktoolcc/* $toolcc 2> /dev/null
 fi 
-chmod -R 775 $toolcc 2> /dev/null
+chmod -R 777 $toolcc 2> /dev/null
+chown root $toolcc 2> /dev/null; 
+chgrp root $toolcc 2> /dev/null; 
 cp -af $bins/* $binu 2> /dev/null 
 cp -af $binu/* $bint 2> /dev/null 
-chmod +x $bint/* 2> /dev/null 
+chmod 777 $bint/* 2> /dev/null 
+chown root $bint/* 2> /dev/null 
+chgrp root $bint/* 2> /dev/null 
 cp -af $binu/* $binc 2> /dev/null 
-chmod +x $binc/* 2> /dev/null 
-[ -w $binr ] && cp -af $binu/* $binr 2> /dev/null && chmod +x $binr/* 2> /dev/null 
+chmod 777 $binc/* 2> /dev/null 
+chown root $binc/* 2> /dev/null 
+chgrp root $binc/* 2> /dev/null 
+chmod -R 755 $bint 2> /dev/null 
+chown root $bint 2> /dev/null 
+chgrp root $bint 2> /dev/null 
 exit 
