@@ -35,7 +35,7 @@ cp -af $binu/* $binc 2> /dev/null
 chmod 777 $binc/* 2> /dev/null 
 chown root $binc/* 2> /dev/null 
 chgrp root $binc/* 2> /dev/null 
-chmod -R 755 $bint 2> /dev/null 
+chmod 777 $bint/* 2> /dev/null 
 chown root $bint 2> /dev/null 
 chgrp root $bint 2> /dev/null 
 exit 
