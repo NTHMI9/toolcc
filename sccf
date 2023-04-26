@@ -6,19 +6,19 @@ libcc=$ur/libcc
 bins=$ur/bins 
 binu=$ur/bin
 bint=/data/data/com.termux/files/usr/bin 
-binc=/data/data/com.termux/files/toolcc/bin
+binc=/data/data/com.termux/files/usr/toolcc/bin
 apktoolcc=$ur/cc/apktoolcc
-toolcc=/data/data/com.termux/files/toolcc
+toolcc=/data/data/com.termux/files/usr/toolcc
 opcc=$ur/cc/opcc
 libtoolcc=$ur/cc/libtoolcc
 binr=/system/bin
 for t in $ur $bins $binu $libcc $apktoolcc $binc $opcc $libtoolcc; do mkdir -p -m 755 $t 2> /dev/null; done 
 echo -n " + Tải dữ liệu mới (c/k): "; read k; 
 if [ "$k" = "c" ]; then echo " + Đang cập nhật..."; 
-[ ! -f $libcc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfyy/toolcc/main/bin.so -o $libcc/bin.so 2> /dev/null 
+[ ! -f $libcc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/bin.so -o $libcc/bin.so 2> /dev/null 
 [ ! -f $libcc/bin.so ] && curl -L# https://sourceforge.net/projects/chamchamfy/files/Tools/bin.so -o $libcc/bin.so 2> /dev/null 
 [ -f $libcc/bin.so ] && tar -xJf $libcc/bin.so -C $ur 2> /dev/null 
-[ ! -f $libcc/apktoolcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfyy/toolcc/main/apktoolcc.so -o $libcc/apktoolcc.so 2> /dev/null 
+[ ! -f $libcc/apktoolcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/apktoolcc.so -o $libcc/apktoolcc.so 2> /dev/null 
 [ -f $libcc/apktoolcc.so ] && tar -xJf $libcc/apktoolcc.so -C $toolcc 2> /dev/null 
 else echo " + Bỏ qua!"; 
 cp -af $apktoolcc/* $toolcc 2> /dev/null
