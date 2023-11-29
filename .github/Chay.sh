@@ -52,7 +52,8 @@ sharedLibrary: false
 sparseResources: false
 doNotCompress:
 - resources.arsc" > $DE/$ten.apk/apktool.yml
-tengoi=$(grep 'package=' $DE/$ten.apk/AndroidManifest.xml | awk '{print $8}' | awk -F'"' '{print $2}')
+tengoi=$(grep 'overlay' $DE/$ten.apk/AndroidManifest.xml | awk -F'"' '{print $6}')
+[ -z "$tengoi" ] && tengoi=$(grep 'package=' $DE/$ten.apk/AndroidManifest.xml | awk '{print $8}' | awk -F'"' '{print $2}')
 echo '<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="31" android:compileSdkVersionCodename="12" package="cc.tengoi.overlay" platformBuildVersionCode="27" platformBuildVersionName="8.1.0">
     <application android:extractNativeLibs="false"/>
     <overlay android:isStatic="true" android:priority="999" android:targetPackage="tengoi"/>
