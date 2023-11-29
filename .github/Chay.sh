@@ -90,6 +90,7 @@ fi
 } 
 
 cd $TOME/VH/apk
+for c in *.apk; do mv -f $c ${c//cc./}; done 
 for tenapk in *.apk; do
 ten=${tenapk%.apk} 
 apktoolc d -f -s $ten.apk -o $DE/$ten.apk 
@@ -97,5 +98,5 @@ cp -af $TOME/NN/$ten.apk/* $DE/$ten.apk 2>/dev/null
 taott
 tuchay
 done
-mv -f $TOME/signed $TOME/.github
+mv -f $TOME/signed/apk $TOME/.github
 echo "- Kết thúc"
