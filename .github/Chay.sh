@@ -78,7 +78,7 @@ fi
 tuchay() { 
 solan=$((solan+1))
 tusualoi 
-apktoolc b -s -f -api 31 $DE/$ten.apk -o $TOME/unsign/$ten.apk 2>&1 | tee $DE/log/$ten.log; 
+apktoolc b -s -f -api 33 $DE/$ten.apk -o $TOME/unsign/$ten.apk 2>&1 | tee $DE/log/$ten.log; 
 if [ -f $TOME/unsign/$ten.apk -a -z "$(grep 'exit code' $DE/log/$ten.log)" ]; then 
 apksigner --in $TOME/unsign/$ten.apk --out $TOME/signed/apk/cc.$ten.apk && rm -f $TOME/signed/apk/cc.$ten.apk.idsig 2>/dev/null && echo " ✓ Đã xong !"; 
 [ -f $TOME/signed/apk/$ten.apk ] && echo -e " ✓ Hoàn thành!" && rm -rf $DE/$ten.apk $DE/log/$ten.log || echo -e " ✓ Xử lý bị lỗi!"; 
