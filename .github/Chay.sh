@@ -8,7 +8,7 @@ sudo rm -rf /usr/share/dotnet
 sudo rm -rf /opt/ghc
 sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-mkdir -p $TOME/NN $TOME/apktoolcc $TOME/DE $TOME/unsign $TOME/signed/apk; 
+mkdir -p $TOME/NN $TOME/apktoolcc $TOME/DE/log $TOME/unsign $TOME/signed/apk; 
 DE=$TOME/DE; 
 chmod -R 777 .github/*.sh >/dev/null
 
@@ -79,11 +79,12 @@ solan=$((solan+1))
 tusualoi 
 apktoolc b -s -f 31 $DE/$ten.apk -o $TOME/unsign/$ten.apk 2>&1 | tee $DE/log/$ten.log; 
 if [ -f $TOME/unsign/$ten.apk -a -z "$(grep 'exit code' $DE/log/$ten.log)" ]; then 
-apksigner --in $TOME/unsign/$ten.apk --out $TOME/signed/apk/cc.$ten.apk && rm -f $TOME/signed/apk/cc.$ten.apk.idsig 2>/dev/null && echo " Đã xong !"; 
-[ -f $TOME/signed/apk/$ten.apk ] && echo -e " $Ye Hoàn thành!" && rm -rf $DE/$ten.apk $DE/log/$ten.log || echo -e " $Ye Xử lý bị lỗi!"; 
+apksigner --in $TOME/unsign/$ten.apk --out $TOME/signed/apk/cc.$ten.apk && rm -f $TOME/signed/apk/cc.$ten.apk.idsig 2>/dev/null && echo " ✓ Đã xong !"; 
+[ -f $TOME/signed/apk/$ten.apk ] && echo -e " ✓ Hoàn thành!" && rm -rf $DE/$ten.apk $DE/log/$ten.log || echo -e " ✓ Xử lý bị lỗi!"; 
 unset solan
 else 
 [ "$solan" -lt 10 ] && tuchay 
+echo " ✓ Xử lý lỗi!"
 fi
 } 
 
@@ -91,6 +92,7 @@ cd $TOME/VH/apk
 for c in *.apk; do mv -f $c ${c//cc./}; done 
 for tenapk in *.apk; do
 ten=${tenapk%.apk} 
+echo " >> Xử lý $ten.apk"
 apktoolc d -f -s $TOME/VH/apk/$ten.apk -o $DE/$ten.apk 
 cp -af $TOME/NN/$ten.apk/* $DE/$ten.apk 2>/dev/null
 taott
