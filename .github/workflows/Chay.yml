@@ -1,36 +1,30 @@
-# This is a basic workflow to help you get started with Actions
 
-name: CI
-
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+name: 'CHAY'
+on: 
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  
+  linux:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: "ubuntu:20.04"
+            pkgs: "clang-11 libstdc++-10-dev"
+            env1: "CC=clang-11 CXX=clang++-11"
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    container:
+      image: ${{ matrix.os }}
+      options: --security-opt seccomp=unconfined
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: build
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          bash Chay.sh
+      - name: upload   
+        uses: actions/upload-artifact@v3
+        with:
+          name: overlay.zip
+          path: $TOME/signed
+          retention-days: 3
