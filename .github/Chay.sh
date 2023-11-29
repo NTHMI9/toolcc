@@ -28,7 +28,7 @@ rm -rf $TOME/NN/*/res/*mnc01-vi $TOME/NN/*/res/*mnc02-vi $TOME/NN/*/res/*mnc03-v
 sed -i 's/````//g' $TOME/NN/*/res/*/*.xml >/dev/null 2>&1 
 
 tar -xJf $TOME/apktoolcc.so -C $TOME/apktoolcc 2>/dev/null
-Taive "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" "$TOME/apktoolcc/lib"
+Taive "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" "$TOME/apktoolcc/lib/apktool_2.9.0.jar"
 7za x -y -tzip $TOME/apktoolcc/lib/apktool_2.9.0.jar -o$TOME/PB >/dev/null 2>&1
 vapk=$(grep 'application.version' $TOME/PB/properties/apktool.properties | awk -F= '{print $2}')
 7za x -y -tzip $TOME/overlay.zip -o$TOME/VH >/dev/null 2>&1
