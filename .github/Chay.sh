@@ -1,6 +1,8 @@
 #chamchamfy
 export TOME="$GITHUB_WORKSPACE"
 export User="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
+sudo apt-get update >/dev/null
+sudo apt-get install curl binutils zipalign p7zip >/dev/null
 
 sudo rm -rf /usr/share/dotnet
 sudo rm -rf /opt/ghc
@@ -8,6 +10,7 @@ sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 mkdir -p $TOME/NN $TOME/apktoolcc $TOME/DE $TOME/unsign $TOME/signed/apk; 
 DE=$TOME/DE;
+tar -xJf $TOME/apktoolcc.so -C $TOME/apktoolcc 2>/dev/null 
 export PATH="$TOME/apktoolcc/bin:$PATH"
 chmod -R 777 $TOME/apktoolcc/bin/* >/dev/null
 chmod -R 777 .github/*.sh >/dev/null
@@ -16,9 +19,6 @@ Xem () { curl -s -G -L -N -H "$User" --connect-timeout 20 "$1"; }
 Taive () { curl -L -N -H "$User" --connect-timeout 20 "$1" -o "$2"; }
 apktoolc() { cd $TOME/apktoolcc/lib 2>/dev/null; java -Xmx1024M -Dfile.encoding=utf-8 -Djdk.util.zip.disableZip64ExtraFieldValidation=true -Djdk.nio.zipfs.allowDotZipEntry=true -jar $TOME/apktoolcc/lib/apktool_2.9.0.jar.jar -p $TOME/apktoolcc "$@"; } 
 apksigner() {  cd $TOME/apktoolcc/lib 2>/dev/null; java -Xmx1024M -Dfile.encoding=utf-8 -jar $TOME/apktoolcc/lib/apksigner.jar sign --cert x509 --key cert --v4-signing-enabled "$@"; } 
-
-sudo apt-get update >/dev/null
-sudo apt-get install curl binutils zipalign p7zip >/dev/null
 
 echo "▼ Tên máy chủ"
 uname -a
@@ -30,7 +30,6 @@ cp -af $TOME/NN/*/*/main/* $TOME/NN 2>/dev/null
 rm -rf $TOME/NN/*/res/*mnc01-vi $TOME/NN/*/res/*mnc02-vi $TOME/NN/*/res/*mnc03-vi 2>/dev/null
 sed -i 's/````//g' $TOME/NN/*/res/*/*.xml >/dev/null 2>&1 
 
-tar -xJf $TOME/apktoolcc.so -C $TOME/apktoolcc 2>/dev/null 
 Taive "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" "$TOME/apktoolcc/lib"
 7za x -y -tzip $TOME/apktoolcc/lib/apktool_2.9.0.jar -o$TOME/PB >/dev/null 2>&1
 vapk=$(grep 'application.version' $TOME/PB/properties/apktool.properties | awk -F= '{print $2}')
