@@ -14,7 +14,7 @@ chmod -R 777 .github/*.sh >/dev/null
 
 Xem () { curl -s -G -L -N -H "$User" --connect-timeout 20 "$1"; }
 Taive () { curl -L -N -H "$User" --connect-timeout 20 "$1" -o "$2"; }
-apktoolc() { cd $TOME/apktoolcc/lib 2>/dev/null; java -Xmx1024M -Dfile.encoding=utf-8 -Djdk.util.zip.disableZip64ExtraFieldValidation=true -Djdk.nio.zipfs.allowDotZipEntry=true -jar $TOME/apktoolcc/lib/apktool_2.9.0.jar.jar -p $TOME/apktoolcc "$@"; } 
+apktoolc() { cd $TOME/apktoolcc/lib 2>/dev/null; java -Xmx1024M -Dfile.encoding=utf-8 -Djdk.util.zip.disableZip64ExtraFieldValidation=true -Djdk.nio.zipfs.allowDotZipEntry=true -jar $TOME/apktoolcc/lib/apktoolc.jar -p $TOME/apktoolcc "$@"; } 
 apksigner() {  cd $TOME/apktoolcc/lib 2>/dev/null; java -Xmx1024M -Dfile.encoding=utf-8 -jar $TOME/apktoolcc/lib/apksigner.jar sign --cert x509 --key cert --v4-signing-enabled "$@"; } 
 
 echo "▼ Tên máy chủ"
@@ -25,11 +25,11 @@ Taive "https://github.com/chamchamfy/MIUI-14-XML-Vietnamese/archive/master.zip" 
 7za x -y -tzip $TOME/NN.zip -o$TOME/NN >/dev/null 2>&1
 cp -af $TOME/NN/*/*/main/* $TOME/NN 2>/dev/null
 rm -rf $TOME/NN/*/res/*mnc01-vi $TOME/NN/*/res/*mnc02-vi $TOME/NN/*/res/*mnc03-vi 2>/dev/null
-sed -i 's/````//g' $TOME/NN/*/res/*/*.xml >/dev/null 2>&1 
+sed -i 's/````//g; s/`````//g' $TOME/NN/*/res/*/*.xml >/dev/null 2>&1 
 
 tar -xJf $TOME/apktoolcc.so -C $TOME/apktoolcc 2>/dev/null
-Taive "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" "$TOME/apktoolcc/lib/apktool_2.9.0.jar"
-7za x -y -tzip $TOME/apktoolcc/lib/apktool_2.9.0.jar -o$TOME/PB >/dev/null 2>&1
+Taive "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" "$TOME/apktoolcc/lib/apktoolc.jar"
+7za x -y -tzip $TOME/apktoolcc/lib/apktoolc.jar -o$TOME/PB >/dev/null 2>&1
 vapk=$(grep 'application.version' $TOME/PB/properties/apktool.properties | awk -F= '{print $2}')
 7za x -y -tzip $TOME/overlay.zip -o$TOME/VH >/dev/null 2>&1
 taott() {
