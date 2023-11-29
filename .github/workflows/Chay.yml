@@ -21,10 +21,10 @@ jobs:
     steps:
       - name: build
         run: |
-          bash /Chay.sh
+          bash $GITHUB_WORKSPACE/Chay.sh
       - name: upload   
         uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
-          path: signed
+          path: $GITHUB_WORKSPACE/signed
           retention-days: 3
