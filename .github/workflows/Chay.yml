@@ -1,29 +1,19 @@
-
 name: 'CHAY'
 on: 
+
   workflow_dispatch:
 jobs:
-  
-  linux:
+  build:
+    name: 'Xem quá trình...'
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: "ubuntu:20.04"
-            pkgs: "clang-11 libstdc++-10-dev"
-            env1: "CC=clang-11 CXX=clang++-11"
-
-    container:
-      image: ${{ matrix.os }}
-      options: --security-opt seccomp=unconfined
-
     steps:
-      - name: build
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: 'Xem thông báo'
         run: |
+          # Run Rebuild 
           bash .github/Chay.sh
-      - name: upload   
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
           path: .github/signed
