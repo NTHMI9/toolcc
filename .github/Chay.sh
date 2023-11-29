@@ -84,7 +84,7 @@ apksigner --in $TOME/unsign/$ten.apk --out $TOME/signed/apk/cc.$ten.apk && rm -f
 [ -f $TOME/signed/apk/$ten.apk ] && echo -e " ✓ Hoàn thành!" && rm -rf $DE/$ten.apk $DE/log/$ten.log || echo -e " ✓ Xử lý bị lỗi!"; 
 unset solan
 else 
-[ "$solan" -lt 10 ] && tuchay || echo " ✓ Xử lý lỗi!"
+[ "$solan" -lt 10 ] && tuchay
 fi
 } 
 
