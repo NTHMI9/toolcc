@@ -83,8 +83,7 @@ apksigner --in $TOME/unsign/$ten.apk --out $TOME/signed/apk/cc.$ten.apk && rm -f
 [ -f $TOME/signed/apk/$ten.apk ] && echo -e " ✓ Hoàn thành!" && rm -rf $DE/$ten.apk $DE/log/$ten.log || echo -e " ✓ Xử lý bị lỗi!"; 
 unset solan
 else 
-[ "$solan" -lt 10 ] && tuchay 
-echo " ✓ Xử lý lỗi!"
+[ "$solan" -lt 10 ] && tuchay || echo " ✓ Xử lý lỗi!"
 fi
 } 
 
@@ -92,7 +91,7 @@ cd $TOME/VH/apk
 for c in *.apk; do mv -f $c ${c//cc./}; done 
 for tenapk in *.apk; do
 ten=${tenapk%.apk} 
-echo " >> Xử lý $ten.apk"
+echo " >> Xử lý: $ten.apk"
 apktoolc d -f -s $TOME/VH/apk/$ten.apk -o $DE/$ten.apk 
 cp -af $TOME/NN/$ten.apk/* $DE/$ten.apk 2>/dev/null
 taott
