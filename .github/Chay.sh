@@ -98,5 +98,5 @@ cp -af $TOME/NN/$ten.apk/* $DE/$ten.apk 2>/dev/null
 taott
 tuchay
 done
-mv -f $TOME/signed/apk $TOME/.github
+mv -f $TOME/signed $TOME/.github
 echo "- Kết thúc"
