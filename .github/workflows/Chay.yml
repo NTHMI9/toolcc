@@ -16,5 +16,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
-          path: .github/signed
+          path: .github/signed/*
           retention-days: 3
