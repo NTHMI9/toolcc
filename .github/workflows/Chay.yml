@@ -12,7 +12,9 @@ jobs:
       - name: 'Xem thông báo'
         run: |
           # Run Rebuild 
-          bash .github/Chay.sh
+          chmod 777 .github/* 2>/dev/null 
+          #bash .github/Chay.sh
+          .github/Reo
       - uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
