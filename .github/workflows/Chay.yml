@@ -13,10 +13,18 @@ jobs:
         run: |
           # Run Rebuild 
           chmod 777 .github/* 2>/dev/null 
-          #bash .github/Chay.sh
+          export NG="$(date +"%y%m%d")"
+          echo "PB=$NG" >> $GITHUB_ENV
           .github/Reo
       - uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
           path: .github/signed/*
           retention-days: 3
+      - name: 'Tải lên'
+        uses: softprops/action-gh-release@v1
+        with:
+          name: overlay_${{ env.PB }}
+          tag_name: overlay_V1.${{ env.PB }}
+          files: .github/signed/*
+          prerelease: true
