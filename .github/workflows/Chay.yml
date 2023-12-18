@@ -19,12 +19,19 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: overlay.zip
-          path: .github/signed/*
+          path: signed/*
           retention-days: 3
-      - name: 'Tải lên'
+      - name: 'Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: overlay_${{ env.PB }}
+          name: overlay_V1.${{ env.PB }}
           tag_name: overlay_V1.${{ env.PB }}
-          files: .github/signed/*
+          files: VH/*
+          prerelease: true
+      - name: 'Flash Overlay'
+        uses: softprops/action-gh-release@v1
+        with:
+          name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
+          tag_name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
+          files: FLASH/*
           prerelease: true
