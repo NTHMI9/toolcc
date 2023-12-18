@@ -24,14 +24,14 @@ jobs:
       - name: 'Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: overlay_V1.${{ env.PB }}
-          tag_name: overlay_V1.${{ env.PB }}
-          path: VH/*
+          name: Overlay_V1.${{ env.PB }}
+          tag_name: Overlay V1.${{ env.PB }}
+          files: OV/*
           prerelease: true
       - name: 'Flash Overlay'
         uses: softprops/action-gh-release@v1
         with:
           name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
-          tag_name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
-          path: FLASH/*
+          tag_name: VH_XIAOMI_TWRP V1.${{ env.PB }}
+          files: UP/*
           prerelease: true
