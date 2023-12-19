@@ -4,13 +4,12 @@ ur=/sdcard/.ur
 libcc=$ur/libcc
 bins=$ur/bins 
 bina=$ur/bin
-bint=/data/data/com.termux/files/usr/bin 
 binc=/data/data/com.termux/files/usr/toolcc/bin
 apktoolcc=$ur/cc/apktoolcc
 toolcc=/data/data/com.termux/files/usr/toolcc
 opcc=$ur/cc/opcc
 libtoolcc=$ur/cc/libtoolcc
-for t in $ur $bins $bina $libcc $apktoolcc $binc $opcc $libtoolcc; do mkdir -p -m 755 $t 2>/dev/null; done 
+for t in $ur $bins $bina $libcc $apktoolcc $binc $opcc $libtoolcc; do mkdir -p $t 2>/dev/null; done 
 echo -n " + Tải dữ liệu mới (c/k): "; read k; 
 if [ "$k" = "c" ]; then echo " + Đang cập nhật..."; 
 [ ! -f $libcc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/bin.so -o $libcc/bin.so 2>/dev/null 
@@ -20,6 +19,8 @@ if [ "$k" = "c" ]; then echo " + Đang cập nhật...";
 [ -f $libcc/apktoolcc.so ] && tar -xJf $libcc/apktoolcc.so -C $apktoolcc 2>/dev/null 
 [ ! -f $libcc/opcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/opcc.so -o $libcc/opcc.so 2>/dev/null 
 [ -f $libcc/opcc.so ] && tar -xJf $libcc/opcc.so -C $opcc 2>/dev/null 
+[ ! -f $libcc/b.zip ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/b.zip -o $libcc/b.zip 2>/dev/null 
+[ -f $libcc/b.zip ] && unzip -qo $libcc/b.zip -d $ur 2>/dev/null 
 fi 
 
 cp -af $bins/* $bina 2>/dev/null 
@@ -27,15 +28,9 @@ cp -af $apktoolcc/* $libtoolcc 2>/dev/null
 cp -af $bina $libtoolcc 2>/dev/null 
 
 cp -af $apktoolcc/* $toolcc 2>/dev/null
-chmod -R 777 $toolcc 2>/dev/null
-chown root $toolcc 2>/dev/null
-chgrp root $toolcc 2>/dev/null
+chmod -R 775 $toolcc 2>/dev/null
 cp -af $bina/* $binc 2>/dev/null 
-chmod 777 $binc/* 2>/dev/null 
-chown root $binc/* 2>/dev/null 
-chgrp root $binc/* 2>/dev/null 
-cp -af $bina/* $bint 2>/dev/null 
-chmod 777 $bint/* 2>/dev/null 
-chown root $bint 2>/dev/null 
-chgrp root $bint 2>/dev/null 
+chmod +x $binc/* 2>/dev/null 
+cp -af $bina/* $PATH 2>/dev/null 
+chmod +x $PATH/* 2>/dev/null 
 exit 
