@@ -2,6 +2,15 @@ name: 'CHAY'
 on: 
 
   workflow_dispatch:
+    inputs:
+      AL:
+        description: 'Thêm âm lịch'
+        required: true
+        default: '1'
+        type: choice
+        options:
+          - '1'
+          - '0'
 jobs:
   build:
     name: 'Xem quá trình...'
@@ -15,8 +24,6 @@ jobs:
           chmod 777 .github/* 2>/dev/null 
           export NG="$(date +"%y%m%d")"
           echo "PB=$NG" >> $GITHUB_ENV
-          export AL="1"
-          echo "AL=1" >> $GITHUB_ENV
           .github/Reo
       - uses: actions/upload-artifact@v3
         with:
