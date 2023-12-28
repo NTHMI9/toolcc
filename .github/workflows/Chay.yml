@@ -1,15 +1,7 @@
 name: 'BUILD OVERLAY'
 on: 
   workflow_dispatch:
-    inputs:
-      AL:
-        description: 'Thêm âm lịch'
-        required: true
-        default: '1'
-        type: choice
-        options:
-          - '1'
-          - '0'
+  
 jobs:
   build:
     name: 'Xem quá trình...'
@@ -19,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
       - name: 'Xem thông báo'
         run: |
-          # Run Rebuild 
+          # Run Build 
           chmod 777 .github/* 2>/dev/null 
           export NG="$(date +"%y%m%d")"
           echo "PB=$NG" >> $GITHUB_ENV
@@ -32,14 +24,14 @@ jobs:
       - name: 'Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: Overlay_V1.${{ inputs.AL }}.${{ env.PB }}
+          name: Overlay_V1.${{ env.PB }}
           tag_name: Overlay_V1.${{ env.PB }}
           files: OV/*
           prerelease: true
       - name: 'Flash Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: VH_XIAOMI_TWRP_V1.${{ inputs.AL }}.${{ env.PB }}
+          name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
           tag_name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
           files: UP/*
           prerelease: true
