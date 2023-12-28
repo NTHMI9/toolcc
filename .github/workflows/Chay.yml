@@ -24,6 +24,7 @@ jobs:
           chmod 777 .github/* 2>/dev/null 
           export NG="$(date +"%y%m%d")"
           echo "PB=$NG" >> $GITHUB_ENV
+          echo "AL=$AL" >> $GITHUB_ENV
           .github/Reo
       - uses: actions/upload-artifact@v3
         with:
@@ -33,14 +34,14 @@ jobs:
       - name: 'Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: Overlay_V1.${{ env.PB }}
-          tag_name: Overlay_V1.${{ env.PB }}
+          name: Overlay_V1.${{ env.AL }}.${{ env.PB }}
+          tag_name: Overlay_V1.${{ env.AL }}.${{ env.PB }}
           files: OV/*
           prerelease: true
       - name: 'Flash Overlay'
         uses: softprops/action-gh-release@v1
         with:
-          name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
-          tag_name: VH_XIAOMI_TWRP_V1.${{ env.PB }}
+          name: VH_XIAOMI_TWRP_V1.${{ env.AL }}.${{ env.PB }}
+          tag_name: VH_XIAOMI_TWRP_V1.${{ env.AL }}.${{ env.PB }}
           files: UP/*
           prerelease: true
