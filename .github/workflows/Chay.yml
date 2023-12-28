@@ -3,7 +3,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      AL:
+      LA:
         description: 'Thêm âm lịch'
         required: true
         default: '1'
@@ -24,7 +24,7 @@ jobs:
           chmod 777 .github/* 2>/dev/null 
           export NG="$(date +"%y%m%d")"
           echo "PB=$NG" >> $GITHUB_ENV
-          echo "AL=$AL" >> $GITHUB_ENV
+          echo "AL=$LA" >> $GITHUB_ENV
           .github/Reo
       - uses: actions/upload-artifact@v3
         with:
