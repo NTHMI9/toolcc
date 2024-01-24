@@ -12,7 +12,7 @@ apktoolcc=$ur/cc/apktoolcc
 toolcc=$PREFIX/toolcc
 opcc=$ur/cc/opcc
 libtoolcc=$ur/cc/libtoolcc
-for t in $ur $bins $bina $libcc $apktoolcc $binc $opcc $libtoolcc; do $root mkdir -p $t 2>/dev/null; done 
+for t in $ur $bins $bina $binx64 $libcc $apktoolcc $binc $opcc $libtoolcc; do $root mkdir -p $t 2>/dev/null; done 
 if [ "$(uname -o)" = "GNU/Linux" ]; then 
 dulieu=$HOME
 ur=$dulieu/.ur
