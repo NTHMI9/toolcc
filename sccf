@@ -1,15 +1,39 @@
 #!/system/bin/sh
 #Code by @chamchamfy
-ur=/sdcard/.ur
+[ "$(uname -o)" = "GNU/Linux" ] && root=sudo || unset root
+[ -d /sdcard ] && dulieu=/sdcard || dulieu=$HOME
+ur=$dulieu/.ur
 libcc=$ur/libcc
 bins=$ur/bins 
 bina=$ur/bin
-binc=/data/data/com.termux/files/usr/toolcc/bin
+binx64=$ur/binx64
+binc=$PREFIX/toolcc/bin
 apktoolcc=$ur/cc/apktoolcc
-toolcc=/data/data/com.termux/files/usr/toolcc
+toolcc=$PREFIX/toolcc
 opcc=$ur/cc/opcc
 libtoolcc=$ur/cc/libtoolcc
-for t in $ur $bins $bina $libcc $apktoolcc $binc $opcc $libtoolcc; do mkdir -p $t 2>/dev/null; done 
+for t in $ur $bins $bina $libcc $apktoolcc $binc $opcc $libtoolcc; do $root mkdir -p $t 2>/dev/null; done 
+if [ "$(uname -o)" = "GNU/Linux" ]; then 
+dulieu=$HOME
+ur=$dulieu/.ur
+echo " + Đang cập nhật..."; 
+[ ! -f $libcc/urtoolcc_wsl.zip ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/urtoolcc_wsl.zip -o $libcc/urtoolcc_wsl.zip 2>/dev/null 
+[ -f $libcc/urtoolcc_wsl.zip ] && unzip -qo $libcc/urtoolcc_wsl.zip -d $ur 2>/dev/null 
+[ ! -f $libcc/apktoolcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/apktoolcc.so -o $libcc/apktoolcc.so 2>/dev/null 
+[ -f $libcc/apktoolcc.so ] && tar -xJf $libcc/apktoolcc.so -C $apktoolcc 2>/dev/null 
+[ ! -f $libcc/opcc.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/opcc.so -o $libcc/opcc.so 2>/dev/null 
+[ -f $libcc/opcc.so ] && tar -xJf $libcc/opcc.so -C $opcc 2>/dev/null 
+[ ! -f $libcc/b.zip ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/b.zip -o $libcc/b.zip 2>/dev/null 
+[ -f $libcc/b.zip ] && unzip -qo $libcc/b.zip -d $ur 2>/dev/null 
+curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/apktool_2.7.0.jar -o $apktoolcc/lib/apktoolc.jar 2>/dev/null 
+$root cp -af $binx64/* /usr/bin 2>/dev/null
+$root chmod +x /usr/bin/* 2>/dev/null
+$root cp -af $apktoolcc/* $toolcc 2>/dev/null
+$root chmod -R 775 $toolcc 2>/dev/null
+$root cp -af $binx64/* $binc 2>/dev/null 
+$root chmod +x $binc/* 2>/dev/null 
+echo " + Xong."; 
+else
 echo -n " + Tải dữ liệu mới (c/k): "; read k; 
 if [ "$k" = "c" ]; then echo " + Đang cập nhật..."; 
 [ ! -f $libcc/bin.so ] && curl -L# https://raw.githubusercontent.com/chamchamfy/toolcc/main/bin.so -o $libcc/bin.so 2>/dev/null 
@@ -33,4 +57,6 @@ cp -af $bina/* $binc 2>/dev/null
 chmod +x $binc/* 2>/dev/null 
 cp -af $bina/* $PATH 2>/dev/null 
 chmod +x $PATH/* 2>/dev/null 
+echo " + Xong."; 
+fi 
 exit 
