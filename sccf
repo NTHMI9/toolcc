@@ -14,6 +14,7 @@ opcc=$ur/cc/opcc
 libtoolcc=$ur/cc/libtoolcc
 for t in $ur $bins $bina $binx64 $libcc $apktoolcc $binc $opcc $libtoolcc; do $root mkdir -p $t 2>/dev/null; done 
 if [ "$(uname -o)" = "GNU/Linux" ]; then 
+$root chmod -R 777 $HOME
 dulieu=$HOME
 ur=$dulieu/.ur
 echo " + Đang cập nhật..."; 
